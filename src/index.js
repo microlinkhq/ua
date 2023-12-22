@@ -1,12 +1,13 @@
 'use strict'
 
-module.exports = client => {
-  const incr = userAgent => client.zincrby('user_agents', 1, userAgent)
+module.exports = redis => {
+  const incr = userAgent =>
+    userAgent && redis.zincrby('user_agents', 1, userAgent)
 
   const top = async (n = 10, { withScore = false } = {}) => {
     const args = ['user_agents', 0, n - 1, 'REV']
     if (withScore) args.push('WITHSCORES')
-    const range = await client.zrange(...args)
+    const range = await redis.zrange(...args)
 
     return range.reduce((acc, val, index) => {
       if (withScore) {

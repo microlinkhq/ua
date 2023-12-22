@@ -2,13 +2,13 @@
   "name": "@microlink/ua",
   "description": "A simple redis primitives to incr() and top() user agents",
   "homepage": "https://github.com/microlinkhq/ua",
-  "version": "0.0.0",
-  "main": "src/index.js",
+  "version": "0.0.2",
   "author": {
     "name": "microlink.io",
     "email": "hello@microlink.io",
     "url": "https://microlink.io"
   },
+  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/microlinkhq/ua.git"
@@ -18,7 +18,6 @@
   },
   "keywords": [],
   "devDependencies": {
-    "ioredis": "latest",
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
     "@ksmithut/prettier-standard": "latest",
@@ -28,6 +27,7 @@
     "conventional-github-releaser": "latest",
     "finepack": "latest",
     "git-authors-cli": "latest",
+    "ioredis": "latest",
     "nano-staged": "latest",
     "npm-check-updates": "latest",
     "simple-git-hooks": "latest",
@@ -59,9 +59,6 @@
       "@commitlint/config-conventional"
     ]
   },
-  "exports": {
-    ".": "./src/index.js"
-  },
   "nano-staged": {
     "*.js": [
       "prettier-standard",
@@ -77,5 +74,8 @@
   "simple-git-hooks": {
     "commit-msg": "npx commitlint --edit",
     "pre-commit": "npx nano-staged"
+  },
+  "dependencies": {
+    "ua-parser-js": "~1.0.37"
   }
 }
