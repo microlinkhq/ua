@@ -2,13 +2,13 @@
   "name": "@microlink/ua",
   "description": "A simple redis primitives to incr() and top() user agents",
   "homepage": "https://github.com/microlinkhq/ua",
-  "version": "0.0.2",
+  "version": "0.0.4",
+  "main": "src/index.js",
   "author": {
-    "name": "microlink.io",
     "email": "hello@microlink.io",
+    "name": "microlink.io",
     "url": "https://microlink.io"
   },
-  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/microlinkhq/ua.git"
@@ -38,6 +38,9 @@
   "engines": {
     "node": ">= 18"
   },
+  "files": [
+    "src"
+  ],
   "scripts": {
     "clean": "rm -rf node_modules",
     "contributors": "(npx git-authors-cli && npx finepack && git add package.json && git commit -m 'build: contributors' --no-verify) || true",
@@ -74,8 +77,5 @@
   "simple-git-hooks": {
     "commit-msg": "npx commitlint --edit",
     "pre-commit": "npx nano-staged"
-  },
-  "dependencies": {
-    "ua-parser-js": "~1.0.37"
   }
 }
