@@ -5,15 +5,15 @@
   <br>
 </div>
 
-![Last version](https://img.shields.io/github/tag/microlinkhq/microlink-ua.svg?style=flat-square)
-[![Coverage Status](https://img.shields.io/coveralls/microlinkhq/microlink-ua.svg?style=flat-square)](https://coveralls.io/github/microlinkhq/microlink-ua)
-[![NPM Status](https://img.shields.io/npm/dm/microlink-ua.svg?style=flat-square)](https://www.npmjs.org/package/microlink-ua)
+![Last version](https://img.shields.io/github/tag/microlinkhq/ua.svg?style=flat-square)
+[![Coverage Status](https://img.shields.io/coveralls/microlinkhq/ua.svg?style=flat-square)](https://coveralls.io/github/microlinkhq/ua)
+[![NPM Status](https://img.shields.io/npm/dm/microlinkhq/ua.svg?style=flat-square)](https://www.npmjs.org/package/microlinkhq/ua)
 
 > A simple redis primitives to incr() and top() user agents.
 
 ## License
 
-**microlink-ua** © [microlink.io](https://microlink.io), released under the [MIT](https://github.com/microlinkhq/microlink-ua/blob/master/LICENSE.md) License.<br>
-Authored and maintained by [microlink.io](https://microlink.io) with help from [contributors](https://github.com/microlinkhq/microlink-ua/contributors).
+**microlink/ua** © [microlink.io](https://microlink.io), released under the [MIT](https://github.com/microlinkhq/ua/blob/master/LICENSE.md) License.<br>
+Authored and maintained by [Kiko Beats](https://kikobeats.com) with help from [contributors](https://github.com/microlinkhq/queue/contributors).
 
 > [microlink.io](https://microlink.io) · GitHub [microlink.io](https://github.com/microlinkhq) · Twitter [@microlinkhq](https://twitter.com/microlinkhq)
