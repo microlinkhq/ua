@@ -17,8 +17,31 @@ const insert = async data => {
   }
 }
 
-test.serial('top(3)', async t => {
-  await insert({ googlebot: 100, bingbot: 50, vercelbot: 10, baidu: 5, yandex: 1 })
-  t.deepEqual(await ua.top(3, { withScore: true }), [['googlebot', 100], ['bingbot', 50], ['vercelbot', 10]])
+test.serial('.top', async t => {
+  await insert({
+    googlebot: 100,
+    bingbot: 50,
+    vercelbot: 10,
+    baidu: 5,
+    yandex: 1
+  })
+  t.deepEqual(await ua.top(3, { withScore: true }), [
+    ['googlebot', 100],
+    ['bingbot', 50],
+    ['vercelbot', 10]
+  ])
   t.deepEqual(await ua.top(3), ['googlebot', 'bingbot', 'vercelbot'])
+})
+
+test.serial('.flush', async t => {
+  await insert({
+    googlebot: 100,
+    bingbot: 50,
+    vercelbot: 10,
+    baidu: 5,
+    yandex: 1
+  })
+  t.deepEqual(await ua.top(3), ['googlebot', 'bingbot', 'vercelbot'])
+  await ua.flush()
+  t.deepEqual(await ua.top(3), [])
 })
