@@ -2,4 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/microlinkhq/ua/compare/v1.0.0...v1.1.0) (2024-01-01)
+
+
+### Features
+
+* flush method ([c875d5b](https://github.com/microlinkhq/ua/commit/c875d5b4ea4a472ae70c966af8dcb49fd35bd69d))
+
 ## 1.0.0 (2023-12-28)
