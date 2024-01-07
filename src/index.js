@@ -1,9 +1,12 @@
 'use strict'
 
+const { isbot } = require('isbot')
+
 const KEY = 'user_agents'
 
 module.exports = redis => {
-  const incr = userAgent => userAgent && redis.zincrby(KEY, 1, userAgent)
+  const incr = userAgent =>
+    userAgent && !isbot(userAgent) && redis.zincrby(KEY, 1, userAgent)
 
   const top = async (n = 10, { withScore = false } = {}) => {
     const args = [KEY, 0, n - 1, 'REV']

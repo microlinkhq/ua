@@ -23,6 +23,9 @@
     "url": "https://github.com/microlinkhq/ua/issues"
   },
   "keywords": [],
+  "dependencies": {
+    "isbot": "~4.3.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
