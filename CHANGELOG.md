@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/microlinkhq/ua/compare/v1.1.0...v1.2.0) (2024-01-07)
+
+
+### Features
+
+* avoid bot insertions ([e85d893](https://github.com/microlinkhq/ua/commit/e85d893dbfc07a74c5f165f3655984ba2d72fd3b))
+
 ## [1.1.0](https://github.com/microlinkhq/ua/compare/v1.0.0...v1.1.0) (2024-01-01)
 
 
