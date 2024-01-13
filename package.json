@@ -24,7 +24,7 @@
   },
   "keywords": [],
   "dependencies": {
-    "isbot": "~4.3.0"
+    "isbot": "~4.4.0"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",
