@@ -22,7 +22,15 @@
   "bugs": {
     "url": "https://github.com/microlinkhq/ua/issues"
   },
-  "keywords": [],
+  "keywords": [
+    "bot",
+    "crawlers",
+    "googlebot",
+    "redis",
+    "spiders",
+    "user-agent",
+    "useragent"
+  ],
   "dependencies": {
     "isbot": "~4.4.0"
   },
