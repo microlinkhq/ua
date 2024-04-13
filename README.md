@@ -11,6 +11,33 @@
 
 > A simple redis primitives to incr() and top() user agents.
 
+## Install
+
+```sh
+npm install @microlink/ua
+```
+
+## Usage
+
+First, initialize the library passing a Redis instance:
+
+```js
+const Redis = require('ioredis')
+const redis = new Redis()
+const ua = require('@microlink/ua')(redis)
+```
+
+After that, the library offers the following methods:
+
+- **incr(userAgent)** — e.g. <small>`ua.incr(req.headers['user-agent'])`</small><br/>
+Increment the counter associated with an user agent.
+
+- **top(n, { withScore })** — e.g. <small>`ua.top(100)`</small><br/>
+Returns an array of the N ranked from from top.
+
+- **flush**  — e.g. <small>`ua.delete()`</small><br/>
+Delete elements.
+
 ## License
 
 **microlink/ua** © [microlink.io](https://microlink.io), released under the [MIT](https://github.com/microlinkhq/ua/blob/master/LICENSE.md) License.<br>
