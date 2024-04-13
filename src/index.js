@@ -15,7 +15,7 @@ module.exports = redis => {
 
     return range.reduce((acc, val, index) => {
       if (withScore) {
-        if (index % 2 === 0) acc.push([val, parseInt(range[index + 1])])
+        if (index % 2 === 0) acc.push([val, Number(range[index + 1])])
       } else {
         acc.push(val)
       }
