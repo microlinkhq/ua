@@ -27,7 +27,7 @@ jobs:
           version: latest
           run_install: true
       - name: Start Redis
-        uses: supercharge/redis-github-action@1.8.0
+        uses: supercharge/redis-github-action@1.8.1
       - name: Test
         run: pnpm test
       - name: Report
