@@ -2,7 +2,7 @@
   "name": "@microlink/ua",
   "description": "A simple redis primitives to incr() and top() user agents",
   "homepage": "https://github.com/microlinkhq/ua",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "main": "src/index.js",
   "author": {
     "email": "hello@microlink.io",
