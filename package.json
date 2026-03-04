@@ -4,6 +4,7 @@
   "homepage": "https://github.com/microlinkhq/ua",
   "version": "1.2.10",
   "main": "src/index.js",
+  "types": "index.d.ts",
   "author": {
     "email": "hello@microlink.io",
     "name": "microlink.io",
@@ -54,7 +55,8 @@
     "node": ">= 18"
   },
   "files": [
-    "src"
+    "src",
+    "index.d.ts"
   ],
   "scripts": {
     "clean": "rm -rf node_modules",
