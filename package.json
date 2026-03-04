@@ -3,8 +3,8 @@
   "description": "A simple redis primitives to incr() and top() user agents",
   "homepage": "https://github.com/microlinkhq/ua",
   "version": "1.2.10",
-  "main": "src/index.js",
   "types": "index.d.ts",
+  "main": "src/index.js",
   "author": {
     "email": "hello@microlink.io",
     "name": "microlink.io",
@@ -14,6 +14,10 @@
     {
       "name": "Kiko Beats",
       "email": "josefrancisco.verdu@gmail.com"
+    },
+    {
+      "name": "theluckystrike",
+      "email": "51033404+theluckystrike@users.noreply.github.com"
     }
   ],
   "repository": {
@@ -55,8 +59,8 @@
     "node": ">= 18"
   },
   "files": [
-    "src",
-    "index.d.ts"
+    "index.d.ts",
+    "src"
   ],
   "scripts": {
     "clean": "rm -rf node_modules",
