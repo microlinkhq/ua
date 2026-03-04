@@ -4,6 +4,7 @@
   "homepage": "https://github.com/microlinkhq/ua",
   "version": "1.2.10",
   "main": "src/index.js",
+  "types": "src/index.d.ts",
   "author": {
     "email": "hello@microlink.io",
     "name": "microlink.io",
