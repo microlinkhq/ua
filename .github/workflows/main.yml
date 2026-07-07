@@ -48,7 +48,8 @@ jobs:
         uses: pnpm/action-setup@v6
         with:
           version: latest
-          run_install: true
+      - name: Install
+        run: pnpm install --dangerously-allow-all-builds
       - name: Start Redis
         uses: supercharge/redis-github-action@v2
       - name: Test
