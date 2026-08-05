@@ -1,6 +1,6 @@
 {
   "name": "@microlink/ua",
-  "description": "A simple redis primitives to incr() and top() user agents",
+  "description": "Redis primitives to increment and rank top user-agent strings for bot analytics.",
   "homepage": "https://github.com/microlinkhq/ua",
   "version": "1.2.16",
   "types": "index.d.ts",
@@ -28,13 +28,16 @@
     "url": "https://github.com/microlinkhq/ua/issues"
   },
   "keywords": [
+    "analytics",
     "bot",
-    "crawlers",
-    "googlebot",
+    "crawler",
+    "incr",
+    "ranking",
     "redis",
-    "spiders",
-    "user-agent",
-    "useragent"
+    "telemetry",
+    "top",
+    "ua",
+    "user-agent"
   ],
   "dependencies": {
     "isbot": "~5.2.0"
