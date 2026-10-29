@@ -2,7 +2,7 @@
   "name": "@microlink/ua",
   "description": "Redis primitives to increment and rank top user-agent strings for bot analytics.",
   "homepage": "https://github.com/microlinkhq/ua",
-  "version": "1.2.17",
+  "version": "1.2.18",
   "types": "index.d.ts",
   "main": "src/index.js",
   "author": {
