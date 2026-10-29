@@ -1,35 +1,40 @@
-import { Redis } from 'ioredis'
+declare namespace userAgents {
+  interface RedisClient {
+    zincrby(key: string, increment: number, member: string): Promise<string>
+    zrange(key: string, start: number, ...args: any[]): Promise<string[]>
+    del(key: string): Promise<number>
+  }
 
-export interface TopOptions {
-  withScore?: boolean
-}
+  interface TopOptions {
+    withScore?: boolean
+  }
 
-export interface TopResult {
-  userAgent: string
-  count?: number
-}
+  type TopResult = [userAgent: string, count: number]
 
-export interface UserAgentsAPI {
-  /**
-   * Increment the count for a user agent string.
-   * @param userAgent - The user agent string to track
-   * @returns Returns 1 if incremented, 0 if skipped (bot detected or null input)
-   */
-  incr: (userAgent: string) => Promise<number>
+  interface UserAgentsAPI {
+    /**
+     * Increment the count for a user agent string.
+     * @param userAgent - The user agent string to track
+     * @returns The new count as Redis replies it, or the falsy input or `false` when skipped (bot detected or empty input)
+     */
+    incr: (userAgent: string | null | undefined) => Promise<string> | false | '' | null | undefined
 
-  /**
-   * Get the top N user agents by count.
-   * @param n - Number of top user agents to return (default: 10)
-   * @param options - Options for the query
-   * @returns Array of user agents, or tuples of [userAgent, count] if withScore is true
-   */
-  top: (n?: number, options?: TopOptions) => Promise<string[] | TopResult[]>
+    /**
+     * Get the top N user agents by count.
+     * @param n - Number of top user agents to return (default: 10)
+     * @param options - Options for the query
+     * @returns Array of user agents, or tuples of [userAgent, count] if withScore is true
+     */
+    top(n?: number, options?: { withScore?: false }): Promise<string[]>
+    top(n: number | undefined, options: { withScore: true }): Promise<TopResult[]>
+    top(n?: number, options?: TopOptions): Promise<string[] | TopResult[]>
 
-  /**
-   * Flush all user agent data from Redis.
-   * @returns Promise that resolves when data is flushed
-   */
-  flush: () => Promise<number>
+    /**
+     * Flush all user agent data from Redis.
+     * @returns Promise that resolves when data is flushed
+     */
+    flush: () => Promise<number>
+  }
 }
 
 /**
@@ -37,4 +42,6 @@ export interface UserAgentsAPI {
  * @param redis - An ioredis instance
  * @returns UserAgentsAPI interface
  */
-export default function userAgents(redis: Redis): UserAgentsAPI
+declare function userAgents(redis: userAgents.RedisClient): userAgents.UserAgentsAPI
+
+export = userAgents
