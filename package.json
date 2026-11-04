@@ -40,7 +40,7 @@
     "user-agent"
   ],
   "dependencies": {
-    "isbot": "~5.2.0"
+    "ipaddr.js": "~2.5.0"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",

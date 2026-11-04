@@ -5,20 +5,25 @@ declare namespace userAgents {
     del(key: string): Promise<number>
   }
 
+  interface ScriptingRedisClient extends RedisClient {
+    defineCommand(name: string, definition: { numberOfKeys?: number, lua: string }): void
+  }
+
+  interface Options {
+    window?: number
+  }
+
   interface TopOptions {
     withScore?: boolean
   }
 
   type TopResult = [userAgent: string, count: number]
 
-  interface UserAgentsAPI {
-    /**
-     * Increment the count for a user agent string.
-     * @param userAgent - The user agent string to track
-     * @returns The new count as Redis replies it, or the falsy input or `false` when skipped (bot detected or empty input)
-     */
-    incr: (userAgent: string | null | undefined) => Promise<string> | false | '' | null | undefined
+  type ClientId = string | null | undefined
 
+  type IncrResult = Promise<string | null> | false
+
+  interface UserAgentsReader {
     /**
      * Get the top N user agents by count.
      * @param n - Number of top user agents to return (default: 10)
@@ -35,6 +40,14 @@ declare namespace userAgents {
      */
     flush: () => Promise<number>
   }
+
+  interface BasicUserAgentsAPI extends UserAgentsReader {
+    incr: (userAgent: string | null | undefined) => IncrResult
+  }
+
+  interface UserAgentsAPI extends UserAgentsReader {
+    incr: (userAgent: string | null | undefined, clientId?: ClientId) => IncrResult
+  }
 }
 
 /**
@@ -42,6 +55,11 @@ declare namespace userAgents {
  * @param redis - An ioredis instance
  * @returns UserAgentsAPI interface
  */
-declare function userAgents(redis: userAgents.RedisClient): userAgents.UserAgentsAPI
+declare function userAgents(redis: userAgents.ScriptingRedisClient, options?: userAgents.Options): userAgents.UserAgentsAPI
+declare function userAgents(redis: userAgents.RedisClient, options?: userAgents.Options): userAgents.BasicUserAgentsAPI
+
+declare namespace userAgents {
+  function isBrowser(userAgent: unknown): boolean
+}
 
 export = userAgents
