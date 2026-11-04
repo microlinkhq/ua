@@ -7,7 +7,9 @@ const ipaddr = require('ipaddr.js')
 const isBrowser = require('./is-browser')
 
 const KEY = 'user_agents'
-const SEEN_KEY_PREFIX = `${KEY}:seen:`
+// Seen keys use the `{user_agents}` hash tag so they share a Cluster slot
+// with the bare `user_agents` counter and one Lua call can touch both.
+const SEEN_KEY_PREFIX = `{${KEY}}:seen:`
 const ONE_DAY_IN_SECONDS = 24 * 60 * 60
 const INCR_ONCE_COMMAND = 'userAgentsIncrOnce'
 

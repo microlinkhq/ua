@@ -26,7 +26,7 @@ const insert = async data => {
   }
 }
 
-const seenKeys = () => client.keys('user_agents:seen:*')
+const seenKeys = () => client.keys('{user_agents}:seen:*')
 
 test.serial('avoid falsy insertions', async t => {
   await ua.incr('')
@@ -248,6 +248,7 @@ test.serial('unusual client ids never throw', async t => {
 test.serial('client marks are hashed', async t => {
   await ua.incr(UA[0], '203.0.113.1')
   const [key] = await seenKeys()
+  t.true(key.startsWith('{user_agents}:seen:'))
   t.false(key.includes('203.0.113.1'))
   t.false(key.includes('Mozilla'))
 })
