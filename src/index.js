@@ -68,7 +68,8 @@ const incrOnce = redis => {
   return redis[INCR_ONCE_COMMAND].bind(redis)
 }
 
-module.exports = (redis, { window = ONE_DAY_IN_SECONDS } = {}) => {
+module.exports = (redis, options) => {
+  const { window = ONE_DAY_IN_SECONDS } = options ?? {}
   assertWindow(window)
 
   let incrOnceCommand

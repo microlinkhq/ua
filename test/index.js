@@ -175,9 +175,39 @@ test.serial(
       '::0:ffff:203.0.113.1'
     ]
     for (const ip of spellings) await ua.incr(UA[0], ip)
+    await ua.incr(UA[0], '::ffff:203.0.113.1%eth0')
     t.deepEqual(await ua.top(1, { withScore: true }), [[UA[0], 1]])
   }
 )
+
+test.serial('counting a client again resolves to null', async t => {
+  t.is(await ua.incr(UA[0], '203.0.113.4'), '1')
+  t.is(await ua.incr(UA[0], '203.0.113.4'), null)
+})
+
+test.serial('a parser failure keeps the raw client id', async t => {
+  const ipaddr = require('ipaddr.js')
+  const original = ipaddr.process
+  ipaddr.process = () => {
+    throw new Error('boom')
+  }
+  t.teardown(() => {
+    ipaddr.process = original
+  })
+
+  await ua.incr(UA[0], '2001:db8:9:9::1')
+  await ua.incr(UA[0], '2001:db8:9:9::1')
+  await ua.incr(UA[0], '2001:db8:9:9::2')
+  t.deepEqual(await ua.top(1, { withScore: true }), [[UA[0], 2]])
+})
+
+test.serial('null options use the default window', async t => {
+  const api = require('..')(client, null)
+  await api.incr(UA[0], '203.0.113.77')
+  const [key] = await seenKeys()
+  const ttl = await client.ttl(key)
+  t.true(ttl > 24 * 60 * 60 - 5 && ttl <= 24 * 60 * 60)
+})
 
 test.serial('different ipv4-mapped clients stay different', async t => {
   await ua.incr(UA[0], '0:0:0:0:0:ffff:198.51.100.1')
@@ -266,6 +296,9 @@ test.serial(
     })
     minimal.incr(UA[0])
     t.deepEqual(calls, [['user_agents', 1, UA[0]]])
+    t.throws(() => minimal.incr(UA[0], '203.0.113.1'), {
+      instanceOf: TypeError
+    })
   }
 )
 

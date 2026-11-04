@@ -93,7 +93,27 @@ const BROWSERS = {
   'chrome arm chromebook':
     'Mozilla/5.0 (X11; CrOS aarch64 15359.58.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36',
   'coc coc desktop':
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/130.0.264 Chrome/124.0.6367.264 Safari/537.36'
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/130.0.264 Chrome/124.0.6367.264 Safari/537.36',
+  'chrome windows 8':
+    'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+  'firefox windows 8.1':
+    'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+  'chrome android 9':
+    'Mozilla/5.0 (Linux; Android 9; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
+  'firefox android 9':
+    'Mozilla/5.0 (Android 9; Mobile; rv:115.0) Gecko/115.0 Firefox/115.0',
+  'opera without an edition':
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 OPR/136.0.0.0',
+  'firefox on the last frozen rv version':
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/119.0',
+  'firefox ubuntu arm':
+    'Mozilla/5.0 (X11; Ubuntu; Linux aarch64; rv:145.0) Gecko/20100101 Firefox/145.0',
+  'firefox fedora 32-bit':
+    'Mozilla/5.0 (X11; Fedora; Linux i686; rv:128.0) Gecko/20100101 Firefox/128.0',
+  'iphone os major only':
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 18 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1',
+  'yandex browser with a two-digit sa token':
+    'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 YaBrowser/24.1.2.86.00 SA/10 Mobile Safari/537.36'
 }
 
 const NOT_BROWSERS = {
@@ -257,7 +277,11 @@ const NOT_BROWSERS = {
   'chrome with a four-digit major version':
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/1000.0.0.0 Safari/537.36',
   'browser-shaped crawler':
-    'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.7390.122 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+    'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.7390.122 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+  'chrome major version with one digit':
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/9.0.0.0 Safari/537.36',
+  'chromeos build without a dot':
+    'Mozilla/5.0 (X11; CrOS x86_64 14541) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36'
 }
 
 for (const [name, userAgent] of Object.entries(BROWSERS)) {
@@ -292,5 +316,14 @@ test('rejects oversized input before matching', t => {
 test('rejects non-string input', t => {
   for (const value of [undefined, null, '', 0, NaN, false, {}, []]) {
     t.false(isBrowser(value))
+  }
+})
+
+test('accepts each macOS 10 minor on chrome and firefox', t => {
+  for (let minor = 0; minor <= 15; minor++) {
+    const chrome = `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_${minor}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36`
+    const firefox = `Mozilla/5.0 (Macintosh; Intel Mac OS X 10.${minor}; rv:115.0) Gecko/20100101 Firefox/115.0`
+    t.true(isBrowser(chrome), `chrome 10_${minor}`)
+    t.true(isBrowser(firefox), `firefox 10.${minor}`)
   }
 })
