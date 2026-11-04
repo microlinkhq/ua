@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.3.0 (2026-11-04)
+
+
+### Features
+
+* count only real browsers, once per client ([#26](https://github.com/microlinkhq/ua/issues/26)) ([c35547a](https://github.com/microlinkhq/ua/commit/c35547a97b9bc4bee7e74c948857a487175deb5b)), closes [microlinkhq/top-user-agents#60](https://github.com/microlinkhq/top-user-agents/issues/60)
+
 ### 1.2.18 (2026-10-29)
 
 
