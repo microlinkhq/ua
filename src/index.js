@@ -39,10 +39,8 @@ const ipClientKeyOrId = id => {
   }
 }
 
-const clientKey = clientId => {
-  const id = String(clientId)
-  return isIP(id) === 0 ? id : ipClientKeyOrId(id)
-}
+const clientKey = clientId =>
+  isIP(clientId) === 0 ? clientId : ipClientKeyOrId(clientId)
 
 const seenKey = (clientId, userAgent) =>
   SEEN_KEY_PREFIX +
