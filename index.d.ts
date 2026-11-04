@@ -3,6 +3,11 @@ declare namespace userAgents {
     zincrby(key: string, increment: number, member: string): Promise<string>
     zrange(key: string, start: number, ...args: any[]): Promise<string[]>
     del(key: string): Promise<number>
+    defineCommand(name: string, definition: { numberOfKeys?: number, lua: string }): void
+  }
+
+  interface Options {
+    window?: number
   }
 
   interface TopOptions {
@@ -11,13 +16,10 @@ declare namespace userAgents {
 
   type TopResult = [userAgent: string, count: number]
 
+  type ClientId = string | null | undefined
+
   interface UserAgentsAPI {
-    /**
-     * Increment the count for a user agent string.
-     * @param userAgent - The user agent string to track
-     * @returns The new count as Redis replies it, or the falsy input or `false` when skipped (bot detected or empty input)
-     */
-    incr: (userAgent: string | null | undefined) => Promise<string> | false | '' | null | undefined
+    incr: (userAgent: string | null | undefined, clientId?: ClientId) => Promise<string | null> | false
 
     /**
      * Get the top N user agents by count.
@@ -42,6 +44,10 @@ declare namespace userAgents {
  * @param redis - An ioredis instance
  * @returns UserAgentsAPI interface
  */
-declare function userAgents(redis: userAgents.RedisClient): userAgents.UserAgentsAPI
+declare function userAgents(redis: userAgents.RedisClient, options?: userAgents.Options): userAgents.UserAgentsAPI
+
+declare namespace userAgents {
+  function isBrowser(userAgent: unknown): boolean
+}
 
 export = userAgents
