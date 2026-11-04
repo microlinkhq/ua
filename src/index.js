@@ -72,13 +72,10 @@ module.exports = (redis, options) => {
   const { window = ONE_DAY_IN_SECONDS } = options ?? {}
   assertWindow(window)
 
-  let incrOnceCommand
-
   const incr = (userAgent, clientId) => {
     if (!isBrowser(userAgent)) return false
     if (clientId == null) return redis.zincrby(KEY, 1, userAgent)
-    incrOnceCommand ??= incrOnce(redis)
-    return incrOnceCommand(KEY, seenKey(clientId, userAgent), userAgent, window)
+    return incrOnce(redis)(KEY, seenKey(clientId, userAgent), userAgent, window)
   }
 
   const top = async (n = 10, { withScore = false } = {}) => {
